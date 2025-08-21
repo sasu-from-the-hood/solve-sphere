@@ -87,7 +87,7 @@ const Services = () => {
             ))}
           </div>
 
-          <div className="text-center mt-16 animate-on-scroll">
+          {/* <div className="text-center mt-16 animate-on-scroll">
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 md:p-12">
               <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                 Need Something Custom?
@@ -103,7 +103,7 @@ const Services = () => {
                 Discuss Your Project
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

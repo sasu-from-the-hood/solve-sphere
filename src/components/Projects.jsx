@@ -6,52 +6,40 @@ import { Button } from './ui/button';
 const Projects = () => {
   const projects = [
     {
-      title: "E-Commerce Platform",
-      description: "A modern e-commerce solution built with React and Node.js, featuring real-time inventory management, secure payments, and advanced analytics.",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop&crop=center",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe API"],
-      results: ["300% increase in conversion rate", "50% faster page load times", "Seamless mobile experience"],
-      category: "E-Commerce"
+      title: "Latest Fitness Ethiopia",
+      description: "A comprehensive gym management system that allows customers to register and receive personal QR codes for seamless check-in tracking and membership management.",
+      image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=400&fit=crop&crop=center",
+      technologies: ["React", "Node.js", "QR Code API", "MongoDB"],
+      results: ["Automated check-in process", "Reduced wait times by 70%", "Digital membership management"],
+      category: "Fitness Management",
+      liveUrl: "https://latestfitnessethiopia.com/"
     },
     {
-      title: "Healthcare Dashboard",
-      description: "Comprehensive patient management system with real-time data visualization, appointment scheduling, and secure medical record storage.",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop&crop=center",
-      technologies: ["React", "TypeScript", "PostgreSQL", "Chart.js"],
-      results: ["40% reduction in admin time", "Improved patient satisfaction", "HIPAA compliant security"],
-      category: "Healthcare"
+      title: "NAF Digital Hotel Booking",
+      description: "Multi-hotel reservation platform for Hawassa city, enabling customers to browse and book rooms across multiple hotels from a single unified platform.",
+      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop&crop=center",
+      technologies: ["React", "Express.js", "Payment Gateway", "PostgreSQL"],
+      results: ["Unified booking system", "Increased hotel occupancy", "Streamlined reservation process"],
+      category: "Hospitality",
+      liveUrl: "http://nafdigital.et"
     },
     {
-      title: "Financial Analytics Tool",
-      description: "Advanced financial dashboard providing real-time market data, portfolio tracking, and predictive analytics for investment firms.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&crop=center",
-      technologies: ["Next.js", "Python", "Redis", "D3.js"],
-      results: ["Real-time data processing", "Advanced visualization", "99.9% uptime achieved"],
-      category: "Finance"
+      title: "Fayasera Coffee Export",
+      description: "Professional portfolio website for a coffee export company showcasing their premium Ethiopian coffee products, export capabilities, and company heritage.",
+      image: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&h=400&fit=crop&crop=center",
+      technologies: ["Next.js", "Tailwind CSS", "Sanity CMS", "Vercel"],
+      results: ["Enhanced brand presence", "International client inquiries", "Professional showcase"],
+      category: "Corporate Portfolio",
+      liveUrl: "https://fayasera.com/"
     },
     {
-      title: "Learning Management System",
-      description: "Interactive online learning platform with video streaming, progress tracking, and collaborative tools for educational institutions.",
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop&crop=center",
-      technologies: ["React", "Express.js", "AWS", "WebRTC"],
-      results: ["10,000+ active users", "95% course completion rate", "Mobile-first design"],
-      category: "Education"
-    },
-    {
-      title: "Restaurant Management",
-      description: "Complete restaurant management solution with online ordering, inventory tracking, and customer relationship management.",
-      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=400&fit=crop&crop=center",
-      technologies: ["React Native", "Firebase", "Stripe", "Google Maps API"],
-      results: ["200% increase in online orders", "Streamlined operations", "Enhanced customer experience"],
-      category: "Restaurant"
-    },
-    {
-      title: "Corporate Website",
-      description: "Professional corporate website with content management system, multi-language support, and advanced SEO optimization.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&crop=center",
-      technologies: ["Next.js", "Sanity CMS", "Tailwind CSS", "Vercel"],
-      results: ["400% increase in organic traffic", "Improved brand presence", "Mobile-optimized design"],
-      category: "Corporate"
+      title: "SolveSphere Student Management",
+      description: "Comprehensive student management system connecting parents, teachers, students, and directors with real-time communication, grade tracking, and administrative tools.",
+      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9d1?w=600&h=400&fit=crop&crop=center",
+      technologies: ["React", "Node.js", "Socket.io", "MySQL"],
+      results: ["Improved parent-teacher communication", "Real-time grade tracking", "Streamlined administration"],
+      category: "Education Management",
+      liveUrl: "https://solvesphr.com/"
     }
   ];
 
@@ -64,12 +52,12 @@ const Projects = () => {
               Our Work
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Explore our portfolio of successful projects. Each solution is crafted with attention 
+              Explore our portfolio of successful software solutions. Each project is crafted with attention 
               to detail and designed to deliver exceptional results for our clients.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
               <Card 
                 key={index} 
@@ -126,7 +114,12 @@ const Projects = () => {
                   </div>
                   
                   <div className="flex space-x-2 pt-4">
-                    <Button variant="outline" size="sm" className="flex-1">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="flex-1"
+                      onClick={() => window.open(project.liveUrl, '_blank')}
+                    >
                       <ExternalLink size={16} className="mr-2" />
                       View Live
                     </Button>
@@ -138,14 +131,14 @@ const Projects = () => {
               </Card>
             ))}
           </div>
-
+{/* 
           <div className="text-center mt-16 animate-on-scroll">
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 md:p-12">
               <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                 Ready to Start Your Project?
               </h3>
               <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Let's bring your vision to life with a custom solution that drives results 
+                Let's bring your vision to life with a custom software solution that drives results 
                 and exceeds your expectations.
               </p>
               <Button 
@@ -157,7 +150,7 @@ const Projects = () => {
                 <ArrowRight className="ml-2" size={20} />
               </Button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
