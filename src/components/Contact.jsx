@@ -38,19 +38,19 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email Us",
-      content: "hello@solvesphere.com",
-      description: "Send us an email and we'll respond within 24 hours"
+      content: "solvesphere999@gmail.com",
+      description: "Send us an email and we'll respond immediately"
     },
     {
       icon: Phone,
       title: "Call Us",
-      content: "+1 (555) 123-4567",
-      description: "Available Monday to Friday, 9 AM - 6 PM EST"
+      content: "+251975824359 || +251928650433 || +251925319177",
+      description: "Available Monday to Sunday"
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      content: "San Francisco, CA",
+      content: "Sidama, Hawassa",
       description: "We work with clients worldwide, remotely and on-site"
     }
   ];

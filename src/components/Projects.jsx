@@ -9,7 +9,7 @@ const Projects = () => {
       title: "Latest Fitness Ethiopia",
       description: "A comprehensive gym management system that allows customers to register and receive personal QR codes for seamless check-in tracking and membership management.",
       image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=400&fit=crop&crop=center",
-      technologies: ["React", "Node.js", "QR Code API", "MongoDB"],
+      technologies: ["React", "Node.js", "QR Code API", "MySQL"],
       results: ["Automated check-in process", "Reduced wait times by 70%", "Digital membership management"],
       category: "Fitness Management",
       liveUrl: "https://latestfitnessethiopia.com/"
@@ -18,7 +18,7 @@ const Projects = () => {
       title: "NAF Digital Hotel Booking",
       description: "Multi-hotel reservation platform for Hawassa city, enabling customers to browse and book rooms across multiple hotels from a single unified platform.",
       image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop&crop=center",
-      technologies: ["React", "Express.js", "Payment Gateway", "PostgreSQL"],
+      technologies: ["React", "Express.js", "Payment Gateway", "MySQL"],
       results: ["Unified booking system", "Increased hotel occupancy", "Streamlined reservation process"],
       category: "Hospitality",
       liveUrl: "http://nafdigital.et"
@@ -27,7 +27,7 @@ const Projects = () => {
       title: "Fayasera Coffee Export",
       description: "Professional portfolio website for a coffee export company showcasing their premium Ethiopian coffee products, export capabilities, and company heritage.",
       image: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&h=400&fit=crop&crop=center",
-      technologies: ["Next.js", "Tailwind CSS", "Sanity CMS", "Vercel"],
+      technologies: ["React", "Tailwind CSS"],
       results: ["Enhanced brand presence", "International client inquiries", "Professional showcase"],
       category: "Corporate Portfolio",
       liveUrl: "https://fayasera.com/"
@@ -35,9 +35,9 @@ const Projects = () => {
     {
       title: "SolveSphere Student Management",
       description: "Comprehensive student management system connecting parents, teachers, students, and directors with real-time communication, grade tracking, and administrative tools.",
-      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9d1?w=600&h=400&fit=crop&crop=center",
-      technologies: ["React", "Node.js", "Socket.io", "MySQL"],
-      results: ["Improved parent-teacher communication", "Real-time grade tracking", "Streamlined administration"],
+      image: "https://apanews.net/wp-content/uploads/2025/03/Ethiopian-School-Leaving-Exam.jpg",
+      technologies: ["React", "Next.js", "SMS Integration", "PostgreSQL"],
+      results: ["Improved parent-student communication", "Real-time grade tracking", "Streamlined administration"],
       category: "Education Management",
       liveUrl: "https://solvesphr.com/"
     }
@@ -131,26 +131,6 @@ const Projects = () => {
               </Card>
             ))}
           </div>
-{/* 
-          <div className="text-center mt-16 animate-on-scroll">
-            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 md:p-12">
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                Ready to Start Your Project?
-              </h3>
-              <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Let's bring your vision to life with a custom software solution that drives results 
-                and exceeds your expectations.
-              </p>
-              <Button 
-                size="lg"
-                onClick={() => document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' })}
-                className="text-lg px-8 py-6 h-auto"
-              >
-                Start Your Project
-                <ArrowRight className="ml-2" size={20} />
-              </Button>
-            </div>
-          </div> */}
         </div>
       </div>
     </section>

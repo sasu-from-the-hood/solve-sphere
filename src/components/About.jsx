@@ -86,18 +86,6 @@ const About = () => {
               ))}
             </div>
           </div>
-
-          {/* <div className="text-center animate-on-scroll">
-            <div className="bg-primary/5 rounded-2xl p-8 md:p-12">
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                Ready to Transform Your Digital Presence?
-              </h3>
-              <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Let's discuss how we can help your business grow with a modern, 
-                high-performance website that converts visitors into customers.
-              </p>
-            </div>
-          </div> */}
         </div>
       </div>
     </section>

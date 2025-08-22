@@ -51,15 +51,16 @@ const Footer = () => {
             <div className="space-y-2">
               <div className="flex items-center space-x-3 text-muted-foreground">
                 <Mail size={16} />
-                <span>hello@solvesphere.com</span>
+                <span>solvesphere@gmail.com</span>
               </div>
               <div className="flex items-center space-x-3 text-muted-foreground">
                 <Phone size={16} />
-                <span>+1 (555) 123-4567</span>
+                <span>+251975824359</span>
+                
               </div>
               <div className="flex items-center space-x-3 text-muted-foreground">
                 <MapPin size={16} />
-                <span>San Francisco, CA</span>
+                <span>SIDAMA, HAWASSA</span>
               </div>
             </div>
           </div>
