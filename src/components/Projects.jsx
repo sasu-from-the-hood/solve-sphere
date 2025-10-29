@@ -15,6 +15,24 @@ const Projects = () => {
       liveUrl: "https://latestfitnessethiopia.com/"
     },
     {
+      title: "BeOn Advert",
+      description: "An ERP system for promoting and advertising companies.",
+      image: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=800&h=600&fit=crop&crop=center",
+      technologies: ["React", "Node.js", "MySQL"],
+      results: ["Ad campaign management", "Targeting and analytics"],
+      category: "Advertising ERP",
+      liveUrl: "https://beonadvert.com/"
+    },
+    {
+      title: "Salem Medium Clinic",
+      description: "An ERP system for clinics to handle patients, appointments, and records.",
+  image: "https://plus.unsplash.com/premium_photo-1682130157004-057c137d96d5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2xpbmljfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000",
+      technologies: ["React", "Express", "PostgreSQL"],
+      results: ["Patient management", "Appointment scheduling"],
+      category: "Healthcare ERP",
+      liveUrl: "https://salemmediumclinic.com/"
+    },
+    {
       title: "NAF Digital Hotel Booking",
       description: "Multi-hotel reservation platform for Hawassa city, enabling customers to browse and book rooms across multiple hotels from a single unified platform.",
       image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop&crop=center",
@@ -57,7 +75,7 @@ const Projects = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <Card 
                 key={index} 
