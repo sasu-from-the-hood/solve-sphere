@@ -1,37 +1,48 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { motion } from 'framer-motion';
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Button } from './ui/button';
 
+const contactSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters').max(50, 'Name is too long'),
+  email: z.string().email('Please enter a valid email address'),
+  company: z.string().optional(),
+  message: z.string().min(10, 'Message must be at least 10 characters').max(1000, 'Message is too long')
+});
+
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    message: ''
-  });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm({
+    resolver: zodResolver(contactSchema)
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // In a real application, you would send this data to your backend
-    console.log('Form submitted:', formData);
+  const onSubmit = async (data) => {
+    setIsSubmitting(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    console.log('Form submitted:', data);
     setIsSubmitted(true);
-    
-    // Reset form after 3 seconds
+    setIsSubmitting(false);
+
+    // Reset form after 5 seconds
     setTimeout(() => {
       setIsSubmitted(false);
-      setFormData({ name: '', email: '', company: '', message: '' });
-    }, 3000);
+      reset();
+    }, 5000);
   };
 
   const contactInfo = [
@@ -56,22 +67,34 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-background">
+    <section id="contact" className="relative py-20 bg-slate-50 dark:bg-slate-900 z-10">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 animate-on-scroll">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               Let's Work Together
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Ready to transform your digital presence? Get in touch with us today and 
+              Ready to transform your digital presence? Get in touch with us today and
               let's discuss how we can help your business grow.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Information */}
-            <div className="space-y-8 animate-on-scroll">
+            <motion.div
+              className="space-y-8"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+            >
               <div>
                 <h3 className="text-2xl font-bold text-foreground mb-6">
                   Get In Touch
@@ -130,10 +153,15 @@ const Contact = () => {
                   </li>
                 </ul>
               </div>
-            </div>
+            </motion.div>
 
             {/* Contact Form */}
-            <div className="animate-on-scroll">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+            >
               <Card className="shadow-lg">
                 <CardHeader>
                   <CardTitle className="text-2xl font-bold text-foreground">
@@ -142,17 +170,27 @@ const Contact = () => {
                 </CardHeader>
                 <CardContent>
                   {isSubmitted ? (
-                    <div className="text-center py-8">
-                      <CheckCircle className="text-green-500 mx-auto mb-4" size={48} />
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="text-center py-8"
+                    >
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+                      >
+                        <CheckCircle className="text-green-500 mx-auto mb-4" size={48} />
+                      </motion.div>
                       <h3 className="text-xl font-semibold text-foreground mb-2">
                         Message Sent Successfully!
                       </h3>
                       <p className="text-muted-foreground">
                         Thank you for reaching out. We'll get back to you within 24 hours.
                       </p>
-                    </div>
+                    </motion.div>
                   ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                           <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
@@ -160,13 +198,20 @@ const Contact = () => {
                           </label>
                           <Input
                             id="name"
-                            name="name"
-                            type="text"
-                            required
-                            value={formData.name}
-                            onChange={handleChange}
+                            {...register('name')}
                             placeholder="Your full name"
+                            className={errors.name ? 'border-red-500' : ''}
                           />
+                          {errors.name && (
+                            <motion.p
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              className="text-red-500 text-sm mt-1 flex items-center gap-1"
+                            >
+                              <AlertCircle size={14} />
+                              {errors.name.message}
+                            </motion.p>
+                          )}
                         </div>
                         <div>
                           <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
@@ -174,54 +219,90 @@ const Contact = () => {
                           </label>
                           <Input
                             id="email"
-                            name="email"
-                            type="email"
-                            required
-                            value={formData.email}
-                            onChange={handleChange}
+                            {...register('email')}
                             placeholder="your@email.com"
+                            className={errors.email ? 'border-red-500' : ''}
                           />
+                          {errors.email && (
+                            <motion.p
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              className="text-red-500 text-sm mt-1 flex items-center gap-1"
+                            >
+                              <AlertCircle size={14} />
+                              {errors.email.message}
+                            </motion.p>
+                          )}
                         </div>
                       </div>
-                      
+
                       <div>
                         <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">
                           Company Name
                         </label>
                         <Input
                           id="company"
-                          name="company"
-                          type="text"
-                          value={formData.company}
-                          onChange={handleChange}
+                          {...register('company')}
                           placeholder="Your company name (optional)"
                         />
                       </div>
-                      
+
                       <div>
                         <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                           Project Details *
                         </label>
                         <Textarea
                           id="message"
-                          name="message"
-                          required
-                          value={formData.message}
-                          onChange={handleChange}
+                          {...register('message')}
                           placeholder="Tell us about your project, goals, timeline, and any specific requirements..."
-                          className="min-h-[120px]"
+                          className={`min-h-[120px] ${errors.message ? 'border-red-500' : ''}`}
                         />
+                        {errors.message && (
+                          <motion.p
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-red-500 text-sm mt-1 flex items-center gap-1"
+                          >
+                            <AlertCircle size={14} />
+                            {errors.message.message}
+                          </motion.p>
+                        )}
                       </div>
-                      
-                      <Button type="submit" size="lg" className="w-full">
-                        Send Message
-                        <Send className="ml-2" size={18} />
-                      </Button>
+
+                      <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <Button
+                          type="submit"
+                          size="lg"
+                          className="w-full"
+                          disabled={isSubmitting}
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <motion.div
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                className="mr-2"
+                              >
+                                ⏳
+                              </motion.div>
+                              Sending...
+                            </>
+                          ) : (
+                            <>
+                              Send Message
+                              <Send className="ml-2" size={18} />
+                            </>
+                          )}
+                        </Button>
+                      </motion.div>
                     </form>
                   )}
                 </CardContent>
               </Card>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

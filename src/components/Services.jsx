@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Code, Database, Cog, Smartphone, Cloud, BarChart } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 
@@ -42,50 +43,108 @@ const Services = () => {
     }
   ];
 
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
   return (
-    <section id="services" className="py-20 bg-background">
+    <section id="services" className="relative py-20 bg-white dark:bg-slate-950 z-10">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 animate-on-scroll">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               Our Services
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              We offer comprehensive software development services to help your business succeed digitally. 
+              We offer comprehensive software development services to help your business succeed digitally.
               From concept to deployment and beyond, we've got you covered.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {services.map((service, index) => (
-              <Card 
-                key={index} 
-                className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-on-scroll group"
+              <motion.div
+                key={index}
+                variants={cardVariants}
+                onHoverStart={() => setHoveredIndex(index)}
+                onHoverEnd={() => setHoveredIndex(null)}
               >
-                <CardHeader className="text-center pb-4">
-                  <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
-                    <service.icon className="text-primary" size={32} />
-                  </div>
-                  <CardTitle className="text-xl font-bold text-foreground">
-                    {service.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    {service.description}
-                  </p>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-sm text-muted-foreground">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3 flex-shrink-0"></div>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+                <Card className="h-full hover:shadow-2xl transition-all duration-300 group relative overflow-hidden">
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+                    initial={false}
+                    animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
+                  />
+
+                  <CardHeader className="text-center pb-4 relative z-10">
+                    <motion.div
+                      className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors"
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <service.icon className="text-primary" size={32} />
+                    </motion.div>
+                    <CardTitle className="text-xl font-bold text-foreground">
+                      {service.title}
+                    </CardTitle>
+                  </CardHeader>
+
+                  <CardContent className="pt-0 relative z-10">
+                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                      {service.description}
+                    </p>
+                    <ul className="space-y-2">
+                      {service.features.map((feature, featureIndex) => (
+                        <motion.li
+                          key={featureIndex}
+                          className="flex items-center text-sm text-muted-foreground"
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: featureIndex * 0.1 }}
+                        >
+                          <motion.div
+                            className="w-1.5 h-1.5 bg-primary rounded-full mr-3 flex-shrink-0"
+                            whileHover={{ scale: 2 }}
+                          />
+                          {feature}
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* <div className="text-center mt-16 animate-on-scroll">
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 md:p-12">

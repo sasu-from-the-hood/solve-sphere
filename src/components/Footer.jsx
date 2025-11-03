@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
+import AnimatedLogo from './AnimatedLogo';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -40,10 +41,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
+            <div className="flex items-center gap-3 mb-4">
+              <AnimatedLogo className="w-12 h-12" showComet={true} />
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Solve Sphere
+              </h3>
+            </div>
             <div>
-              <h3 className="text-2xl font-bold text-primary mb-2">Solve Sphere</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Building custom software solutions that drive business growth. 
+                Building custom software solutions that drive business growth.
                 We create scalable, efficient, and innovative applications.
               </p>
             </div>

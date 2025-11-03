@@ -9,11 +9,18 @@
     "lint": "eslint . --ext js,jsx,ts,tsx"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "lucide-react": "^0.263.1",
+    "@hookform/resolvers": "^5.2.2",
     "clsx": "^2.0.0",
-    "tailwind-merge": "^1.14.0"
+    "framer-motion": "^12.23.24",
+    "lucide-react": "^0.263.1",
+    "react": "^18.2.0",
+    "react-countup": "^6.5.3",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.66.0",
+    "react-intersection-observer": "^10.0.0",
+    "react-router-dom": "^7.9.5",
+    "tailwind-merge": "^1.14.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
