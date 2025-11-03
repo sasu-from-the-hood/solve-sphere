@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Zap, Sparkles } from "lucide-react";
+import { ArrowRight, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -11,7 +11,9 @@ const Hero = () => {
   useEffect(() => {
     const generateGlowingLines = () => {
       const lines = [];
-      const numLines = 6;
+      // Reduce lines on mobile (2 lines), more on desktop (6 lines)
+      const isMobile = window.innerWidth < 768;
+      const numLines = isMobile ? 2 : 6;
 
       for (let i = 0; i < numLines; i++) {
         lines.push({
@@ -27,7 +29,15 @@ const Hero = () => {
 
     generateGlowingLines();
     const interval = setInterval(generateGlowingLines, 8000);
-    return () => clearInterval(interval);
+
+    // Re-generate on resize
+    const handleResize = () => generateGlowingLines();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   // Animate glowing squares - one square per line that fades after line passes
@@ -110,7 +120,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen w-full flex items-center bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-slate-950 dark:via-blue-950 dark:to-purple-950 overflow-hidden">
+    <section id="home" className="relative min-h-screen w-full flex items-center bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 overflow-hidden">
       {/* Futuristic Grid Background */}
       <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
         {/* Static Grid Pattern */}
@@ -193,12 +203,7 @@ const Hero = () => {
             variants={itemVariants}
             className="inline-flex items-center gap-2 bg-primary/10 backdrop-blur-sm border border-primary/30 text-primary px-4 py-2 rounded-full text-sm font-medium mb-8"
           >
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            >
-              <Zap className="w-4 h-4" />
-            </motion.div>
+            <Zap className="w-4 h-4" />
             Solve Sphere  - Modern  Solutions
           </motion.div>
 
@@ -208,22 +213,8 @@ const Hero = () => {
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight"
           >
             We Build{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent block">
+            <span className="text-white dark:text-white block">
               Digital Excellence
-              <motion.span
-                className="inline-block ml-2"
-                animate={{
-                  scale: [1, 1.2, 1],
-                  rotate: [0, 180, 360]
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-primary inline" />
-              </motion.span>
             </span>
           </motion.h1>
 

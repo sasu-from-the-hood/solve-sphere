@@ -31,7 +31,6 @@ const Contact = () => {
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     console.log('Form submitted:', data);
@@ -55,7 +54,7 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Call Us",
-      content: "+251975824359 || +251928650433 || +251925319177",
+      content: "+251975824359 || +251928650433 || +251925319177 || +251915677200 ",
       description: "Available Monday to Sunday"
     },
     {

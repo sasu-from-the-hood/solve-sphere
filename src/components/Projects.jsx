@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, ArrowRight, Eye } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { projectsData } from '../data/projects';
@@ -59,7 +58,7 @@ const Projects = () => {
                 variants={cardVariants}
                 layout
               >
-                <Card className="overflow-hidden h-full flex flex-col group hover:shadow-2xl transition-all duration-300">
+                <Card className="overflow-hidden h-full flex flex-col hover:shadow-2xl transition-all duration-300">
                   <div className="relative overflow-hidden">
                     <motion.img
                       src={project.image}
@@ -68,14 +67,6 @@ const Projects = () => {
                       whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.3 }}
                     />
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <Link to={`/case-study/${project.id}`}>
-                        <Button variant="secondary" size="lg">
-                          <Eye className="mr-2" size={20} />
-                          View Case Study
-                        </Button>
-                      </Link>
-                    </div>
                     <div className="absolute top-4 left-4">
                       <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
                         {project.category}
@@ -84,7 +75,7 @@ const Projects = () => {
                   </div>
 
                   <CardHeader>
-                    <CardTitle className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                    <CardTitle className="text-xl font-bold text-foreground">
                       {project.title}
                     </CardTitle>
                   </CardHeader>
@@ -115,26 +106,18 @@ const Projects = () => {
 
                     <div className="flex-grow"></div>
 
-                    <div className="flex space-x-2 pt-4">
-                      <Link to={`/case-study/${project.id}`} className="flex-1">
-                        <Button
-                          variant="default"
-                          size="sm"
-                          className="w-full"
-                        >
-                          <ArrowRight size={16} className="mr-2" />
-                          Case Study
-                        </Button>
-                      </Link>
+                    <div className="pt-4">
                       <Button
-                        variant="outline"
+                        variant="default"
                         size="sm"
+                        className="w-full"
                         onClick={(e) => {
                           e.preventDefault();
                           window.open(project.liveUrl, '_blank');
                         }}
                       >
-                        <ExternalLink size={16} />
+                        <ExternalLink size={16} className="mr-2" />
+                        View Project
                       </Button>
                     </div>
                   </CardContent>

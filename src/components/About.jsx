@@ -23,9 +23,9 @@ const About = () => {
   ];
 
   const achievements = [
-    "50+ successful projects delivered",
-    "99.9% client satisfaction rate",
-    "Average 40% improvement in site performance",
+    "10+ successful projects delivered",
+    "client satisfaction",
+    "Average 80% improvement in site performance",
     "Expertise in modern frameworks and technologies"
   ];
 

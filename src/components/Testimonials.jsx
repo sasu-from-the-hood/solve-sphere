@@ -1,10 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Star, Quote, ArrowRight } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
 
 const Testimonials = () => {
+  // Get first letter of name for avatar
+  const getAvatarLetter = (name) => {
+    return name.charAt(0).toUpperCase();
+  };
+
+  // Generate color based on first letter
+  const getAvatarColor = (letter) => {
+    const colors = [
+      'bg-blue-500',
+      'bg-purple-500',
+      'bg-pink-500',
+      'bg-green-500',
+      'bg-yellow-500',
+      'bg-red-500',
+      'bg-indigo-500',
+      'bg-teal-500',
+    ];
+    const index = letter.charCodeAt(0) % colors.length;
+    return colors[index];
+  };
+
   const testimonials = [
     {
       name: "Gym Manager",
@@ -107,18 +127,21 @@ const Testimonials = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                variants={cardVariants}
-                whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Link to={`/case-study/${testimonial.projectId}`} className="block h-full">
-                  <Card className="h-full hover:shadow-xl transition-shadow duration-300 cursor-pointer group">
+            {testimonials.map((testimonial, index) => {
+              const avatarLetter = getAvatarLetter(testimonial.name);
+              const avatarColor = getAvatarColor(avatarLetter);
+
+              return (
+                <motion.div
+                  key={index}
+                  variants={cardVariants}
+                  whileHover={{ y: -5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <Card className="h-full hover:shadow-xl transition-shadow duration-300">
                     <CardContent className="p-6 flex flex-col h-full">
                       <div className="mb-4">
-                        <Quote className="text-primary opacity-20 group-hover:opacity-40 transition-opacity" size={40} />
+                        <Quote className="text-primary opacity-20" size={40} />
                       </div>
 
                       <div className="flex mb-4">
@@ -136,12 +159,12 @@ const Testimonials = () => {
                       </p>
 
                       <div className="flex items-center gap-4 pt-4 border-t">
-                        <motion.img
+                        <motion.div
                           whileHover={{ scale: 1.1 }}
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          className="w-12 h-12 rounded-full object-cover"
-                        />
+                          className={`${avatarColor} w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold shadow-md`}
+                        >
+                          {avatarLetter}
+                        </motion.div>
                         <div className="flex-grow">
                           <h4 className="font-semibold text-foreground">
                             {testimonial.name}
@@ -154,16 +177,11 @@ const Testimonials = () => {
                           </p>
                         </div>
                       </div>
-
-                      <div className="flex items-center gap-2 mt-4 text-primary font-semibold text-sm group-hover:gap-3 transition-all">
-                        <span>View Project</span>
-                        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                      </div>
                     </CardContent>
                   </Card>
-                </Link>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </div>
